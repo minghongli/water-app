@@ -1,0 +1,11 @@
+{
+	"navigationBarTitleText": "申请成为公司用户",
+	"usingComponents": {
+		"i-input": "../../static/iview/input/index",
+		"i-radio-group": "../../static/iview/radio-group/index",
+		"i-radio": "../../static/iview/radio/index",
+		"i-checkbox-group": "../../static/iview/checkbox-group/index",
+		"i-checkbox": "../../static/iview/checkbox/index",
+		"i-button": "../../static/iview/button/index"
+	}
+}

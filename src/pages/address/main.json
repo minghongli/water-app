@@ -1,0 +1,10 @@
+{
+	"navigationBarTitleText": "我的收货地址",
+	"usingComponents": {
+		"i-panel": "../../static/iview/panel/index",
+		"i-input": "../../static/iview/input/index",
+		"i-card": "../../static/iview/card/index",
+		"i-tab-bar": "../../static/iview/tab-bar/index",
+		"i-tab-bar-item": "../../static/iview/tab-bar-item/index"
+	}
+}

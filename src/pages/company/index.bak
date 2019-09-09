@@ -1,0 +1,276 @@
+<template>
+  <div>
+    <i-panel title="group-水果">
+    <i-radio-group :current="current" @change="handleFruitChange">
+        <!-- <i-radio wx:for="{{fruit}}" :position="position" wx:key="{{item.id}}" value="item.name">
+        </i-radio> -->
+        <i-radio v-for="item of fruit" :position="position" :key="item.id" :value="item.name"></i-radio>
+    </i-radio-group>
+</i-panel>
+    <i-panel title>
+      12313
+      <input v-model="formdata.companyName">
+      <!-- <i-input :value.sync="formdata.companyName" placeholder="请输入..." style="width: 300px"></i-input> -->
+      <i-input
+        :value="formdata.companyName"
+        maxlength="50"
+        title="公司名称"
+        autofocus
+        placeholder="例：xx公司" bindchange="changeName"
+      />
+      <i-input :value="formdata.userName" maxlength="50" title="收货人" autofocus placeholder="请输入姓名" />
+      <i-input
+        :value="formdata.phone"
+        maxlength="50"
+        type="number"
+        title="联系电话"
+        placeholder="请输入联系电话"
+      />
+      <i-input :value="formdata.address" maxlength="50" title="公司地址" placeholder="例：xx市xx区xx大厦xx室" />
+      <!-- <i-input value="{{ value2 }}" type="number" title="联系电话" placeholder="请输入手机号" /> -->
+
+      <view class="section i-cell i-input">
+        <picker bindchange="bindInvoiceChange" :value="invoiceIdx" :range="invoiceType">
+          <view class="picker">发票类型：{{invoiceType[invoiceIdx]}}</view>
+        </picker>
+      </view>
+      <view class="section i-cell i-input">
+        <picker bindchange="bindInvoiceChange" :value="demandIdx" :range="demandOfMonth">
+          <view class="picker">月需求量：{{demandOfMonth[demandIdx]}}</view>
+        </picker>
+      </view>
+      <view class="section i-cell i-input">
+        <picker bindchange="bindInvoiceChange" :value="singleIdx" :range="singleNumber">
+          <view class="picker">单次送水：{{singleNumber[singleIdx]}}</view>
+        </picker>
+      </view>
+      <view class="section i-cell i-input">
+        <picker bindchange="bindInvoiceChange" :value="brandIdx" :range="brands">
+          <view class="picker">选择品牌：{{brands[brandIdx]}}</view>
+        </picker>
+        <!-- <p>选择品牌</p>
+  <div class="brands" v-for="item of brands" :key="item" :value="item">
+    {{item}}
+        </div>-->
+      </view>
+
+      <!-- <i-radio-group :current="formdata.invoiceType" bindchange="handleFruitChange">
+        <i-radio v-for="item of invoiceType" :position="position" :key="item.id" :value="item.name"></i-radio>
+      </i-radio-group>
+      <i-radio-group :current="formdata.demandOfMonth" bindchange="handleFruitChange">
+        <i-radio v-for="item of demandOfMonth" :position="position" :key="item.id" :value="item.name"></i-radio>
+      </i-radio-group>
+      <i-radio-group :current="formdata.singleNumber" bindchange="handleFruitChange">
+        <i-radio v-for="item of singleNumber" :position="position" :key="item.id" :value="item.name"></i-radio>
+      </i-radio-group>-->
+    </i-panel>
+
+    <i-button @click="commit" type="primary">确认申请</i-button>
+  </div>
+</template>
+<script>
+import card from "@/components/card";
+
+export default {
+  data() {
+    return {
+              fruit: [{
+            id: 1,
+            name: '香蕉',
+        }, {
+            id: 2,
+            name: '苹果'
+        }, {
+            id: 3,
+            name: '西瓜'
+        }, {
+            id: 4,
+            name: '葡萄',
+        }],
+        current: '苹果',
+        position: 'left',
+        animal: '熊猫',
+        checked: false,
+        disabled: false,
+      formdata: {
+        companyName: "123",
+        userName: "",
+        phone: "",
+        address: "",
+        invoiceType: "",
+        demandOfMonth: "",
+        singleNumber: "",
+        brand: ""
+      },
+      invoiceType: ["请选择", "不开发票", "普通发票", "专用发票"],
+      invoiceIdx: 0,
+      demandOfMonth: [
+        "请选择",
+        "20-50(桶)",
+        "50-100(桶)",
+        "100-300(桶)",
+        "300-500(桶)",
+        "500桶以上"
+      ],
+      demandIdx: 0,
+      singleNumber: [
+        "请选择",
+        "5-10(桶)",
+        "10-20(桶)",
+        "20-50(桶)",
+        "50桶以上"
+      ],
+      singleIdx: 0,
+
+      brands: [
+        "维维碱LOVE天然泉水",
+        "乐百氏",
+        "怡宝",
+        "景田",
+        "雀巢",
+        "娃哈哈",
+        "燕京",
+        "农夫山泉",
+        "5100西藏冰川矿泉水",
+        "善品香山",
+        "时代峡谷"
+      ], //品牌
+      brandIdx: 0
+      // current: "不开发票",
+      // position: "left",
+      // checked: false,
+      // demandOfMonth: [
+      //   {
+      //     id: 1,
+      //     name: "20-50(桶)"
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "50-100(桶)"
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "100-300(桶)"
+      //   },
+      //   {
+      //     id: 4,
+      //     name: "300-500(桶)"
+      //   },
+      //   {
+      //     id: 5,
+      //     name: "500桶以上"
+      //   }
+      // ],
+      // singleNumber: [
+      //   {
+      //     id: 1,
+      //     name: "5-10(桶)"
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "10-20(桶)"
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "20-50(桶)"
+      //   },
+      //   {
+      //     id: 4,
+      //     name: "50桶以上"
+      //   }
+      // ]
+    };
+  },
+
+  components: {
+    card
+  },
+
+  methods: {
+        handleFruitChange({ detail = {} }) {
+          console.info(this.current);
+          console.info(detail);
+          console.info(detail.mp.detail.value)
+        // this.setData({
+        //     current: detail.value
+        // });
+    },
+    changeName({ detail = {} }){
+      console.info(e);
+      //event.detail.detail.value
+
+//       this.setData({
+
+// myData: event.detail.detail.value
+
+// })
+      //console.info(detail.value);
+      //console.info(detail.mp.detail.key)
+      // this.setData({
+      //     formdata.companyName: detail.value
+      // });
+    },
+    handleChange(detail) {
+      console.info(detail);
+      this.current = detail.mp.detail.key;
+      //this.current=detail.key;
+    },
+    bindViewTap() {
+      const url = "../logs/main";
+      if (mpvuePlatform === "wx") {
+        mpvue.switchTab({
+          url
+        });
+      } else {
+        mpvue.navigateTo({
+          url
+        });
+      }
+    },
+    clickHandle(ev) {
+      console.log("clickHandle:", ev);
+      // throw {message: 'custom test'}
+    },
+    bindInvoiceChange({ detail = {} }) {
+      // this.setData({
+      //     current: detail.value
+      // });
+    },
+    demandOfMonthChange() {},
+    singleNumberChange() {},
+    brandChange({ detail = {} }) {
+      // this.setData({
+      //     formdata.brand: detail.value
+      // });
+    },
+    commit() {
+      //alert(1);
+      console.info(this.formdata);
+    }
+  },
+  created() {
+    console.info(22);
+    // let app = getApp()
+  }
+};
+</script>
+
+<style scoped>
+.brands {
+  display: flex;
+  border: 1px solid #d2d2d2;
+}
+.section {
+  background: #fff;
+  padding: 10px 15px;
+  color: #495060;
+  font-size: 16px;
+  line-height: 1.4;
+  border-bottom: 1px solid #d2d2d2;
+}
+.i-button{
+  position:fixed;
+  left:0;
+  bottom:15px;
+}
+</style>
