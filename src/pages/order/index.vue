@@ -98,7 +98,6 @@ export default {
   },
 
   created() {
-    console.info(22);
     // let app = getApp()
   }
 };
