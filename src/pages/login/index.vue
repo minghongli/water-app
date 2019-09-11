@@ -21,13 +21,13 @@ export default {
       }
     };
   },
-
   components: {
     card
   },
 
   methods: {
-    doLogin() {
+    doLogin(e) {
+      console.info(e);
       wx.showLoading({
         title: "登录中...", //提示的内容,
         mask: true, //显示透明蒙层，防止触摸穿透,
@@ -53,6 +53,7 @@ export default {
             let url = "../my/main";
             wx.navigateTo({ url });
           }
+          wx.hideLoading();
         }
       });
     }

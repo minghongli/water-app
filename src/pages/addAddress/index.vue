@@ -23,7 +23,7 @@
       placeholder="点击选择"
     />
     <i-input
-      :value="formdata.detailAddress"
+      :value="formdata.address_detail"
       maxlength="50"
       title="详细地址"
       autofocus
@@ -31,6 +31,9 @@
     />
 
   </i-panel>
+  <div class="bottom">
+    <i-button type="primary" bind:click="save">保存</i-button>
+  </div>
 </div>
 
   <!-- <div>
@@ -53,11 +56,10 @@ export default {
   data() {
     return {
       formdata: {
-        companyName: "",
-        userName: "",
+        name: "",
         phone: "",
         address: "",
-        detailAddress:"",
+        address_detail:"",
       },
     };
   },
@@ -79,9 +81,19 @@ export default {
         });
       }
     },
-    clickHandle(ev) {
-      console.log("clickHandle:", ev);
-      // throw {message: 'custom test'}
+    save(){
+            //let { result } = post("/user/addAddress", this.formdata);
+            let result = {
+              openid: "o3zUZ41Q8u4K7iseTfJ_S73kSq-0",
+              session_key: "mJp0HZ3olfr2DrEFxA+/3A==",
+              token:
+                "c57a39c3ec4b457a5753bbb07f9e1b7ac7f139c3f05355673cc01695ba2343bb774c79785463991730ce5a21f27c013539facce63c80dd68"
+            };
+            //_this.$store.dispatch("login", result); //dispatch Action
+            _this.$store.commit('login',result);  //commit mutation
+
+            let url = "../my/main";
+            wx.navigateTo({ url });
     },
     handleChange({ detail }) {
       this.current = detail.key;
