@@ -21,7 +21,7 @@ function formatNumber(n) {
   
   //-------------------------------------------------------------------------请求的封装
   
-  const host = 'http://localhost:3002';//localhost:
+  const host = 'http://app.watercui.cn';//localhost:
   export {
     host
   }
