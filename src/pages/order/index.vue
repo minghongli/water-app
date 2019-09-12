@@ -1,34 +1,39 @@
 <template>
   <div>
-    <i-tabs :current="current" @change="handleChange">
+    <i-tabs :current="current" @change="changeTab">
       <!-- <i-tab key="tab1" title="已购买"></i-tab> -->
       <!-- 已购买就是待配送 -->
-      <i-tab key="tab2" title="待配送"></i-tab>
+      <i-tab key="0" title="待配送"></i-tab>
       <!-- <i-tab key="tab3" title="配送中"></i-tab> -->
-      <i-tab key="tab3" title="已完成"></i-tab>
+      <i-tab key="1" title="已完成"></i-tab>
       <!-- <i-tab key="tab4" title="待评价"></i-tab> -->
-      <i-tab key="tab5" title="全部"></i-tab>
+      <i-tab key="-1" title="全部"></i-tab>
     </i-tabs>
     <div class="list">
-      <div class="item card" @click="goToDetail()">
-        <div class="content">
+      <div
+        class="item card"
+        v-for="(item,index) in list"
+        :key="index"
+        @click="goToDetail(item._id)"
+      >
+        <div class="content" v-for="(goods,idx) in item.goods" :key="idx">
           <div class="item-l">
-            <img src="http://www.shuidifu.cn/upload/201610/18/thumb_201610181357309290.jpg" alt>
+            <img :src="goods.pic_url" alt />
           </div>
 
           <div class="item-c des">
-            <p class="title">乐百氏桶装天然泉水</p>
+            <p class="title">{{goods.name}}</p>
           </div>
           <div class="item-r">
-            <p class="price">￥15.00</p>
-            <p class="count">*1</p>
+            <p class="price">￥{{goods.price}}.00</p>
+            <p class="count">*{{goods.num}}</p>
           </div>
         </div>
         <div class="footer">
-          <p class="total">合计:￥15.00</p>
-          <div class="btn-bar">
+          <p class="total">合计:￥{{item.total_price}}.00</p>
+          <!-- <div class="btn-bar">
             <button>确认收货</button>
-          </div>
+          </div>-->
         </div>
       </div>
       <!-- <i-card
@@ -54,14 +59,86 @@ import card from "@/components/card";
 export default {
   data() {
     return {
-      current: "tab1",
+      current: "0",
       // list:[],
-      motto: "Hello miniprograme",
-      userInfo: {
-        nickName: "mpvue",
-        avatarUrl: "http://mpvue.com/assets/logo.png",
-        current: "homepage"
-      }
+      list: [
+        {
+          create_time: "2019-09-06T09:22:27.666Z",
+          total_price: 30,
+          goods: [
+            {
+              has_comment: false,
+              _id: "5d7225718557c526ac3cde2e",
+              name: "11",
+              price: 10,
+              num: 2,
+              total_price: "20",
+              pic_url:
+                "http://shuidifu.cn/upload/201905/21/201905211830167115.jpg"
+            },
+            {
+              has_comment: false,
+              _id: "5d7225718557c526ac3cde2d",
+              name: "11",
+              price: 10,
+              num: 1,
+              total_price: "10",
+              pic_url:
+                "http://shuidifu.cn/upload/201905/21/201905211830167115.jpg"
+            }
+          ],
+          address: {
+            phone: "13120121466",
+            name: "minghong",
+            address_all: "地址1"
+          },
+          user_id: "id",
+          remark: "",
+          status: "未支付",
+          code: 0,
+          delivery_state: 0,
+          create_time_timestamp: "1567761777",
+          __v: 0
+        },
+        {
+          create_time: "2019-09-06T09:20:44.463Z",
+          total_price: 30,
+          goods: [
+            {
+              has_comment: false,
+              _id: "5d72250cc6f8e262a80405d8",
+              name: "11",
+              price: 10,
+              num: 2,
+              total_price: "20",
+              pic_url:
+                "http://shuidifu.cn/upload/201905/21/201905211830167115.jpg"
+            },
+            {
+              has_comment: false,
+              _id: "5d72250cc6f8e262a80405d7",
+              name: "11",
+              price: 10,
+              num: 1,
+              total_price: "10",
+              pic_url:
+                "http://shuidifu.cn/upload/201905/21/201905211830167115.jpg"
+            }
+          ],
+          address: {
+            phone: "13120121466",
+            name: "minghong",
+            address_all: "地址1"
+          },
+          user_id: "id",
+          remark: "",
+          status: "未支付",
+          code: 0,
+          delivery_state: 0,
+          create_time_timestamp: "1567761676",
+          __v: 0
+        }
+      ]
     };
   },
 
@@ -70,29 +147,17 @@ export default {
   },
 
   methods: {
-    handleChange(detail) {
+    changeTab(detail) {
       console.info(detail);
       this.current = detail.mp.detail.key;
       //this.current=detail.key;
-    },
-    bindViewTap() {
-      const url = "../logs/main";
-      if (mpvuePlatform === "wx") {
-        mpvue.switchTab({
-          url
-        });
-      } else {
-        mpvue.navigateTo({
-          url
-        });
-      }
     },
     clickHandle(ev) {
       console.log("clickHandle:", ev);
       // throw {message: 'custom test'}
     },
-    goToDetail() {
-      const url = "../orderDetail/main";
+    goToDetail(id) {
+      const url = "../orderDetail/main?id=" + id;
       wx.navigateTo({ url });
     }
   },

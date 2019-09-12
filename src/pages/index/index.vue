@@ -214,7 +214,7 @@ export default {
   },
 
   async created() {
-    await this.getGoods();
+    //await this.getGoods();
     console.info(this.brands);
     // let app = getApp()
   }
