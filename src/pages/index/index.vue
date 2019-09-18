@@ -97,7 +97,6 @@ export default {
         //   comment_number: 0,
         //   __v: 0
         // },
-
         // {
         //   _id: "5d76ff9520515dc2d87fe576",
         //   id: 1,
@@ -203,18 +202,21 @@ export default {
       //   content: this.content,
       //   phone: this.phone
       // });
-      const data = await get("/v1/getGoodsList", {});
+      const res = await get("/v1/getGoodsList", {});
+      if (res.status == 200) {
+        this.goods = res.result;
+      }
       // const data = await axios({
       //   url: "/v1/getGoodsList", //admin_login
       //   method: "get",
       //   data: {}
       // });
-      console.info(data);
+      //console.info(data);
     }
   },
 
   async created() {
-    //await this.getGoods();
+    await this.getGoods();
     console.info(this.brands);
     // let app = getApp()
   }

@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="money">
-        <span>订单总价：<span><span>{{total_price}}</span>
+        <span>订单总价：</span><span>{{total_price}}</span>
       </div>
     </section>
     <section class="address">
@@ -29,10 +29,10 @@
         <span class="label">订单编号：</span>
         <span>{{number}}</span>
       </p>
-      <!-- <p>
-        <span class="label">create_time</span>
-        <span>{{number}}</span>
-      </p> -->
+      <p>
+        <span class="label">下单时间：</span>
+        <span>{{create_time}}</span>
+      </p>
       <p>
         <span class="label">收货人：</span>
         <span>{{orderInfo.address.name}}&nbsp;{{orderInfo.address.phone}}</span>
@@ -110,9 +110,10 @@ export default {
   },
 
   created() {
-    this.orderId = this.$root.$mp.query.id;
-    console.info(this.orderId);
-    this.getInfo();
+    // this.orderId = this.$root.$mp.query.id;
+    // console.info(this.orderId);
+    // this.getInfo();
+    
     // let app = getApp()
   }
 };
@@ -121,15 +122,14 @@ export default {
 <style scoped>
 .state{
   height:40px;
-
 }
 section {
   background-color: #fff;
   margin-bottom: 10px;
+  font-size:14px;
 }
 .cartlist {
   background: #fff;
-  margin-bottom: 110rpx;
   margin-top: 20rpx;
 }
 .cartlist .item {
@@ -178,6 +178,7 @@ section {
   line-height:2;
 }
 .address p .label{
+  display: inline-block;
   width:80px;
   text-align: justify;
   text-align-last: justify;

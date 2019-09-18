@@ -92,7 +92,7 @@ export default {
   },
 
   created(options) {
-    console.info("created");
+    //console.info("created");
     //console.log(options);
     //console.info(this.goodsInfo);
   },

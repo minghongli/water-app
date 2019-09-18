@@ -1,17 +1,17 @@
 <template>
 <div class="container">
   <ul>
-    <li v-for="(item,index) in list" :key="item.id" bind:click="bindViewTap">
+    <li v-for="item in list" :key="item.id" bind:click="bindViewTap">
       <div class="left">
       <p class="left-top"><span class="name">{{item.name}}</span><span calss="phone">{{item.phone}}</span></p>
       <p>{{item.address}}</p>
       </div>
-      <div class="edit">
+      <!-- <div class="edit">
         | 编辑
-      </div>
+      </div> -->
     </li>
   </ul>
-  <div class="btn-new" @click="bindViewTap">+新增地址</div>
+  <div class="btn-new" @click="AddAddress">+新增地址</div>
 </div>
 
 </template>
@@ -43,11 +43,19 @@ export default {
   },
 
   methods: {
-    bindViewTap() {
+    AddAddress() {
       const url = "../addAddress/main";
-      console.info(1);
       if (mpvuePlatform === "wx") {
-        console.info(2);
+        wx.navigateTo({ url });
+      } else {
+        mpvue.navigateTo({
+          url
+        });
+      }
+    },
+    goToDetail(){
+            const url = "../addAddress/main";
+      if (mpvuePlatform === "wx") {
         wx.navigateTo({ url });
       } else {
         mpvue.navigateTo({

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import axios from 'axios'
 
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://app.watercui.cn' : 'http://app.watercui.cn'
+const baseUrl = process.env.NODE_ENV === 'development' ? 'https://app.watercui.cn' : 'https://app.watercui.cn'
 
 axios.defaults.timeout = 30000
 axios.defaults.baseURL = baseUrl

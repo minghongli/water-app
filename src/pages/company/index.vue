@@ -16,31 +16,31 @@
       <label for>公司地址:</label>
       <input v-model="formdata.address" placeholder="例：xx市xx区xx大厦xx室" />
     </div>
-    <select v-model="formdata.invoiceType">
+    <!-- <select v-model="formdata.invoiceType">
     <option disabled value="">请选择</option>
     <option>A</option>
     <option>B</option>
     <option>C</option>
-  </select>
+    </select>-->
     <div class="line">
-        <picker @change="bindInvoiceChange" :value="invoiceIdx" :range="invoiceType">
-          <view class="picker">发票类型：{{invoiceType[invoiceIdx]}}</view>
-        </picker>
+      <picker @change="bindInvoiceChange" :value="invoiceIdx" :range="invoiceType">
+        <view class="picker">发票类型：{{invoiceType[invoiceIdx]}}</view>
+      </picker>
     </div>
     <div class="line">
-        <picker @change="demandOfMonthChange" :value="demandIdx" :range="demandOfMonth">
-          <view class="picker">月需求量：{{demandOfMonth[demandIdx]}}</view>
-        </picker>
+      <picker @change="demandOfMonthChange" :value="demandIdx" :range="demandOfMonth">
+        <view class="picker">月需求量：{{demandOfMonth[demandIdx]}}</view>
+      </picker>
     </div>
     <div class="line">
-        <picker @change="singleNumberChange" :value="singleIdx" :range="singleNumber">
-          <view class="picker">单次送水：{{singleNumber[singleIdx]}}</view>
-        </picker>
+      <picker @change="singleNumberChange" :value="singleIdx" :range="singleNumber">
+        <view class="picker">单次送水：{{singleNumber[singleIdx]}}</view>
+      </picker>
     </div>
     <div class="line">
-        <picker @change="brandChange" :value="brandIdx" :range="brands">
-          <view class="picker">选择品牌：{{brands[brandIdx]}}</view>
-        </picker>
+      <picker @change="brandChange" :value="brandIdx" :range="brands">
+        <view class="picker">选择品牌：{{brands[brandIdx]}}</view>
+      </picker>
     </div>
     <i-button @click="commit" type="primary">确认申请</i-button>
   </div>
@@ -55,8 +55,8 @@ export default {
       checked: false,
       disabled: false,
       formdata: {
-        companyName: "",
-        userName: "",
+        companyName: "公司名",
+        userName: "收货人",
         phone: "",
         address: "",
         invoiceType: "",
@@ -151,23 +151,23 @@ export default {
     },
     bindInvoiceChange(e) {
       //console.info(e.mp.detail.value);
-      this.invoiceIdx=e.mp.detail.value;
-      this.formdata.invoiceType=this.invoiceType[this.invoiceIdx];
+      this.invoiceIdx = e.mp.detail.value;
+      this.formdata.invoiceType = this.invoiceType[this.invoiceIdx];
       // this.setData({
       //     invoiceIdx: e.mp.detail.value
       // });
     },
     demandOfMonthChange(e) {
-      this.demandIdx=e.mp.detail.value;
-      this.formdata.demandOfMonthType=this.demandOfMonth[this.demandIdx];
+      this.demandIdx = e.mp.detail.value;
+      this.formdata.demandOfMonthType = this.demandOfMonth[this.demandIdx];
     },
     singleNumberChange(e) {
-      this.singleIdx=e.mp.detail.value;
-      this.formdata.singleNumber=this.singleNumber[this.singleIdx];
+      this.singleIdx = e.mp.detail.value;
+      this.formdata.singleNumber = this.singleNumber[this.singleIdx];
     },
     brandChange(e) {
-      this.brandIdx=e.mp.detail.value;
-      this.formdata.brand=this.brands[this.brandIdx];
+      this.brandIdx = e.mp.detail.value;
+      this.formdata.brand = this.brands[this.brandIdx];
     },
     commit() {
       //alert(1);
@@ -179,11 +179,11 @@ export default {
     // let app = getApp()
   },
   bindInvoiceChange() {
-      alert(2)
-      // this.setData({
-      //     current: detail.value
-      // });
-    },
+    alert(2);
+    // this.setData({
+    //     current: detail.value
+    // });
+  }
 };
 </script>
 
@@ -198,7 +198,7 @@ export default {
   align-items: center;
 }
 .line label {
-  width:75px;
+  width: 75px;
   color: #495060;
 }
 .line input {

@@ -9,6 +9,7 @@
 		"pages/company/main",
 		"pages/address/main",
 		"pages/addAddress/main",
+		"pages/updateAddress/main",
 		"pages/goods/main",
 		"pages/goodsDetail/main",
 		"pages/submitOrder/main",
@@ -19,7 +20,7 @@
 	"window": {
 		"backgroundTextStyle": "light",
 		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTitleText": "WeChat",
+		"navigationBarTitleText": "水递夫",
 		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {

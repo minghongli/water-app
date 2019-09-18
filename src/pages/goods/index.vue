@@ -9,10 +9,10 @@
       <ul class="goodsul">
         <li v-for="(item, index) in goods" :key="item.id" @click="goToGoodsDetail(item.id)">
           <div class="goods-pic">
-            <img :src="item.imgUrl" alt>
+            <img :src="item.pic_url" alt />
           </div>
           <div class="goods-spec">
-            <p class="goods-title">{{item.title}}</p>
+            <p class="goods-title">{{item.name}}</p>
             <p class="goods-bottom">
               <span class="price">¥{{item.price}}</span>
               <!-- <button bind:click="handleClick">立即订水</button> -->
@@ -35,20 +35,20 @@ export default {
       brands: store.state.brands,
       currentType: 1,
       goods: [
-        {
-          id: "1",
-          imgUrl:
-            "http://www.shuidifu.cn/upload/201905/21/thumb_201905211830222115.jpg",
-          title: "善品香山饮用天然泉水",
-          price: "19.00"
-        },
-        {
-          id: "2",
-          imgUrl:
-            "http://www.shuidifu.cn/upload/201905/21/thumb_201905211830222115.jpg",
-          title: "善品香山饮用天然泉水",
-          price: "19.00"
-        }
+        // {
+        //   id: "1",
+        //   imgUrl:
+        //     "http://www.shuidifu.cn/upload/201905/21/thumb_201905211830222115.jpg",
+        //   title: "善品香山饮用天然泉水",
+        //   price: "19.00"
+        // },
+        // {
+        //   id: "2",
+        //   imgUrl:
+        //     "http://www.shuidifu.cn/upload/201905/21/thumb_201905211830222115.jpg",
+        //   title: "善品香山饮用天然泉水",
+        //   price: "19.00"
+        // }
       ]
     };
   },
@@ -66,38 +66,28 @@ export default {
       console.log("clickHandle:", ev);
       // throw {message: 'custom test'}
     },
-    handleChange(detail) {
+    async handleChange(detail) {
       //console.info(detail);
       this.currentType = detail.mp.detail.key; //detail.key
-      this.goods = [
-        {
-          id: "1",
-          imgUrl: "http://shuidifu.cn/upload/201610/25/201610251730340696.jpg",
-          title: "百岁山348",
-          price: "45.00"
-        },
-        {
-          id: "2",
-          imgUrl: "http://shuidifu.cn/upload/201610/25/201610251730340696.jpg",
-          title: "百岁山348",
-          price: "45.00"
-        }
-      ];
+      this.getGoods();
     },
     goToGoodsDetail(id) {
       const url = "../goodsDetail/main?id=" + id; //'../logs/main' company
       wx.navigateTo({ url });
     },
     async getGoods() {
-      console.info(1);
-      const res = await get("/v1/getGoodsList", {
-        package_type: this.currentType
-        // openId: this.userInfo.openId,
-        // name: this.userInfo.nickName,
-        // content: this.content,
-        // phone: this.phone
-      });
-      console.info(res);
+      const res = await get(`/v1/getGoodsList?package_type=${this.currentType}`,{});
+      if (res.status == 200) {
+        console.info(111);
+        this.goods = res.result;
+      }
+      // const res = await get("/v1/getGoodsList", {
+      //   package_type: this.currentType
+      //   // openId: this.userInfo.openId,
+      //   // name: this.userInfo.nickName,
+      //   // content: this.content,
+      //   // phone: this.phone
+      // });
     }
   },
   created() {
